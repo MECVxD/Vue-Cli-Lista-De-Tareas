@@ -14,13 +14,19 @@
             </li>
         </ul>
 </template>
+
 <script>
+import { bus } from './main.js'
+
 export default {
     props:['tareas'],
     methods: {
         borrar: function(indice){
             this.tareas.splice(indice,1)
         }
+    },
+    created(){
+        bus.actualizarContador(this.tareas.length)
     }
 }
 </script>

@@ -13,13 +13,15 @@
     </div>
 </template>
 <script>
+import {bus} from './main.js'
+
 export default {
     data(){
         return {
             nuevaTarea: ''
         }
     },
-    props:['tareas'],
+    props:['tareas', 'actualizarContador'],
     methods: {
         agregarTarea(){
             var texto =this.nuevaTarea.trim()//borra espacios al principio y al final
@@ -28,10 +30,13 @@ export default {
                     texto: texto,
                     terminada: false
                 })
-                this.$emit('incrementarContador', 1)
+                bus.actualizarContador(this.tareas.length)
             }   
             this.nuevaTarea=''//Deja en blanco el espacio
         }
+    },
+    created(){
+        bus.actualizarContador(this.tareas.length)
     }
 }
 </script>

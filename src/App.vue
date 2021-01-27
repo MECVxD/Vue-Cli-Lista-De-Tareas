@@ -2,8 +2,7 @@
   <div id="app" class="container">
     <div class="jumbotron">
       <titulo v-bind:titulo="titulo"></titulo>
-      {{numTareas}}
-      <nueva-tarea v-bind:tareas="tareas" v-on:incrementarContador="numTareas += $event"></nueva-tarea>
+      <nueva-tarea v-bind:tareas="tareas" :actualizarContador="actualizarContador"></nueva-tarea>
       <lista-tareas v-bind:tareas="tareas"></lista-tareas>
     </div>
   </div>
@@ -23,7 +22,6 @@ export default {
     data(){
       return {
         titulo: 'Lista de Tareas',
-        numTareas: 3,
         tareas: [
           {
                 texto: 'Aprender Vue.js',
@@ -38,6 +36,11 @@ export default {
                 terminada: false
             }
         ]
+      }
+    },
+    methods:{
+      actualizarContador(){
+        this.numTareas++
       }
     }
 }
