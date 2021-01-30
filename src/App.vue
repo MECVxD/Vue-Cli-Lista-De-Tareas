@@ -42,6 +42,22 @@ export default {
       actualizarContador(){
         this.numTareas++
       }
+    },
+    created(){
+      this.$http.get('tareas.json')
+      .then(respuesta=>{
+         return respuesta.json()
+      })
+      .then(respuestajson=>{
+          for(let id in respuestajson){
+            let tarea ={
+              id:id,
+              texto:respuestajson[id].texto,
+              terminada:respuestajson[id].terminada
+            }
+            this.tareas.push(tarea)
+          }
+      })
     }
 }
 </script>
